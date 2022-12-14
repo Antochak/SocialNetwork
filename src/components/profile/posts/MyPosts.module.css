@@ -1,3 +1,7 @@
 .mypost {
     font-style: oblique;
+    margin: 10px;
+}
+.postBlock {
+    margin: 10px;
 }
