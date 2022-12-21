@@ -1,8 +1,13 @@
 import React from 'react';
 import classes from './MyPosts.module.css';
 import {Post} from "./post/Post";
+import {PostObjTypeArr} from "../../../redux/state";
 
-export const MyPosts =( )=> {
+
+
+export const MyPosts =(props: PostObjTypeArr )=> {
+    let postMap = props.postObj.map(el => <Post message={el.message} like={el.likes}/>)
+
     return (<div className={classes.content}>
         <div className={classes.postBlock}>
             <h3>My posts</h3>
@@ -13,11 +18,8 @@ export const MyPosts =( )=> {
                 <button>Add post</button>
             </div>
             <div className={classes.mypost}>
-                <Post message={'Недовольный'} like={20}/>
-                <Post message={'Злой'} like={15}/>
+                {postMap}
             </div>
-
-
         </div>
     </div>)
 }
