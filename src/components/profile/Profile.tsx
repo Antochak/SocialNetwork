@@ -9,7 +9,7 @@ export const Profile = (props: PostObjTypeArr)=> {
 
     return (<div className={classes.content}>
         <ProfileInfo/>
-        <MyPosts postObj={props.postObj}/>
+        <MyPosts postObj={props.postObj} />
         Main content
     </div>)
 }
