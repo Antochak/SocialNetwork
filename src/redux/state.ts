@@ -1,3 +1,8 @@
+let rerenderEntireTree = () => {
+    console.log('state changed')
+
+}
+
 export type PostObjType = {
     id: number
     message: string
@@ -13,6 +18,9 @@ export type MessageType = {
 }
 export type ProfilePageType = {
     postObj:  PostObjType[]
+    newPostText: string
+   // addPost: (message: string)=>void
+   // ChangeNewPostText: (newText: string)=>void
 }
 export type DialogPageType ={
     dialogs: DialogType[]
@@ -20,9 +28,6 @@ export type DialogPageType ={
 }
 export type SideBarType = {
 
-}
-export type PostObjTypeArr = {
-    postObj: PostObjType[]
 }
 export type MessageTypeArr = {
     messages: MessageType[]
@@ -35,6 +40,7 @@ export type TypeState = {
 export type MessgesAndDialogsType = {
     dialogs: DialogType[]
     messages: MessageType[]
+    addPost: (message: string)=>void
 }
 
 export let state: TypeState = {
@@ -46,7 +52,8 @@ export let state: TypeState = {
             {id: 3, message: 'it-incubator', likes: 62},
             {id: 4, message: 'it-kamasutra', likes: 1},
             {id: 5, message: 'kolya kakaet every day', likes: 46}
-        ]
+        ],
+        newPostText: 'some text'
     },
     dialogPage: {
         dialogs: [{id: 1, name: 'Antocha'},
@@ -65,7 +72,17 @@ export let state: TypeState = {
     sideBarPage: {}
 }
 
-export let addPost = (postMessage: string) => {
-    let newPost = {id: 5, message: postMessage, likes: 0}
+export let addPost = () => {
+    let newPost: PostObjType = {id: 5, message: state.profilePage.newPostText, likes: 0}
     state.profilePage.postObj.push(newPost)
+    state.profilePage.newPostText = ''
+    rerenderEntireTree()
+}
+export const ChangeNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText
+    rerenderEntireTree()
+}
+
+export const subscribe = (observer: any) => {
+    rerenderEntireTree = observer;
 }
